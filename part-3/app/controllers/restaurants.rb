@@ -15,6 +15,7 @@ post '/restaurants' do
   end
 end
 
-post 'restaurants/:id' do
-
+get '/restaurants/:id' do
+  @restaurant = Restaurant.find(params[:id])
+  erb :"restaurants/show"
 end
