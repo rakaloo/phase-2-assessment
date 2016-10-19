@@ -14,6 +14,7 @@ post '/users' do
 end
 
 get '/users/:id' do
+  redirect "/not_authorized" if current_user != User.find_by(id: params[:id])
   @user = User.find_by(id: params[:id])
   erb :"users/show"
 end

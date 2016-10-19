@@ -50,14 +50,18 @@ delete '/restaurants/:id' do
 end
 
 get '/restaurants/:id' do
-  @restaurant = Restaurant.find_by(id: params[:id])
-  @review = Review.new
+  if @restaurant = Restaurant.find_by(id: params[:id])
+    @review = Review.new
 
-  if params[:new_review]
-    @new_review = true
+    if params[:new_review]
+      @new_review = true
+    end
+
+    erb :"restaurants/show"
+  else
+    status 404
+    erb :"not_found"
   end
-
-  erb :"restaurants/show"
 end
 
 post '/restaurants/:id/reviews' do
