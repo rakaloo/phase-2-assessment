@@ -20,6 +20,14 @@ post '/restaurants' do
   end
 end
 
+get '/restaurants/:id/edit' do
+  erb :"restaurants/edit"
+end
+
+put '/restaurants/:id' do
+
+end
+
 get '/restaurants/:id' do
   @restaurant = Restaurant.find(params[:id])
   erb :"restaurants/show"
