@@ -2,3 +2,13 @@
 
 <p>Address: <%= @restaurant.full_address %></p>
 <p>Cuisine: <%= @restaurant.cuisine %></p>
+<p>Added by: <%= @restaurant.owner.username %></p>
+
+<h3>Reviews</h3>
+<ul>
+  <% if reviews = @restaurant.reviews %>
+    <% reviews.each do |review| %>
+      <%= erb :"reviews/_review", layout: false, locals: { review: review } %><br>
+    <% end %>
+  <% end %>
+</ul>
