@@ -1,0 +1,15 @@
+<% if review.errors.any? %>
+<%= erb :"_errors", locals: {errors: review.errors} %>
+<% end %>
+
+<form method="POST" action="/restaurants/<%= restaurant.id %>/reviews">
+  <select name="review[rating]" value="<%= review.rating %>">
+    <option value=5>5</option>
+    <option value=4>4</option>
+    <option value=3>3</option>
+    <option value=2>2</option>
+    <option value=1>1</option>
+  </select><br>
+  <input type="textarea" name="review[content]" placeholder="Your review here" value="<%= review.content %>"><br>
+  <input type="submit" value="Add review">
+</form>

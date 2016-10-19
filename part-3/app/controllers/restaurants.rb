@@ -51,5 +51,25 @@ end
 
 get '/restaurants/:id' do
   @restaurant = Restaurant.find_by(id: params[:id])
+  @review = Review.new
   erb :"restaurants/show"
+end
+
+post '/restaurants/:id/reviews' do
+  authenticate!
+
+  @restaurant = Restaurant.find_by(id: params[:id])
+
+  @review = Review.new(params[:review])
+  @review.author = current_user
+  @review.restaurant = @restaurant
+
+  if @review.save
+    redirect "/restaurants/#{@restaurant.id}"
+  else
+    erb :"restaurants/show"
+  end
+
+
+
 end

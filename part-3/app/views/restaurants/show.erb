@@ -5,6 +5,7 @@
 <p>Added by: <%= @restaurant.owner.username %></p>
 
 <h3>Reviews</h3>
+
 <ul>
   <% if reviews = @restaurant.reviews %>
     <% reviews.each do |review| %>
@@ -12,3 +13,12 @@
     <% end %>
   <% end %>
 </ul>
+
+<h3>Leave a Review</h3>
+
+<% if logged_in? %>
+  <%= erb :"reviews/_form", layout: false, locals: { restaurant: @restaurant, review: @review } %>
+<% else %>
+  <p>You must be logged in to leave a review.</p>
+  <a href="/login">Login</a>
+<% end %>
