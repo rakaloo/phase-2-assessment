@@ -21,11 +21,17 @@ post '/restaurants' do
 end
 
 get '/restaurants/:id/edit' do
+  @restaurant = Restaurant.find(params[:id])
   erb :"restaurants/edit"
 end
 
 put '/restaurants/:id' do
-
+  @restaurant = Restaurant.find(params[:id])
+  if @restaurant.update(params[:restaurant])
+    redirect "/restaurants/#{@restaurant.id}"
+  else
+    erb :"restaurants/edit"
+  end
 end
 
 get '/restaurants/:id' do

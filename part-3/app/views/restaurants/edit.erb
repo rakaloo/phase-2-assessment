@@ -4,7 +4,9 @@
 <%= erb :"_errors", locals: {errors: @restaurant.errors} %>
 <% end %>
 
-<form method="POST" action="/restaurants">
+<form method="POST" action="/restaurants/<%= @restaurant.id %>">
+  <input type="hidden" name="_method" value="PUT">
   <%= erb :"restaurants/_form", locals: {restaurant: @restaurant} %>
-  <input type="submit" value="Add restaurant">
+  <input type="submit" value="Update restaurant">
 </form>
+
