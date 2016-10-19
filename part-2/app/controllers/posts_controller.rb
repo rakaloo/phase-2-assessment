@@ -28,5 +28,9 @@ end
 put "/posts/:id/like" do
   @post = Post.find(params[:id])
   @post.increment!(:likes_count)
-  redirect "/posts/#{@post.id}"
+  if request.xhr?
+    @post.likes_count.to_s
+  else
+    redirect "/posts/#{@post.id}"
+  end
 end
