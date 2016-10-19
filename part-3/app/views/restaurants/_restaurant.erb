@@ -1,4 +1,7 @@
 <li>
   <a href="/restaurants/<%= restaurant.id %>"><%= restaurant.name %></a><br>
   <%= restaurant.short_address %>
+  <% if logged_in? && current_user.id == restaurant.owner_id.to_i %><br>
+    <a href="/restaurants/<%= restaurant.id %>/edit">Edit</a><br>
+  <% end %>
 </li>
