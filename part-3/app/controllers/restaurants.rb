@@ -10,6 +10,8 @@ get '/restaurants/new' do
 end
 
 post '/restaurants' do
+  authenticate!
+
   @restaurant = Restaurant.new(params[:restaurant])
   @restaurant.owner = current_user
 
@@ -21,12 +23,16 @@ post '/restaurants' do
 end
 
 get '/restaurants/:id/edit' do
-  @restaurant = Restaurant.find(params[:id])
+  @restaurant = Restaurant.find_by(id: params[:id])
+
+  redirect "/not_authorized" if current_user != @restaurant.owner
+
   erb :"restaurants/edit"
 end
 
 put '/restaurants/:id' do
-  @restaurant = Restaurant.find(params[:id])
+  @restaurant = Restaurant.find_by(id: params[:id])
+
   if @restaurant.update(params[:restaurant])
     redirect "/restaurants/#{@restaurant.id}"
   else
@@ -35,13 +41,15 @@ put '/restaurants/:id' do
 end
 
 delete '/restaurants/:id' do
-  @restaurant = Restaurant.find(params[:id])
+  @restaurant = Restaurant.find_by(id: params[:id])
+
+  redirect "/not_authorized" if current_user != @restaurant.owner
 
   @restaurant.destroy
   redirect "/restaurants"
 end
 
 get '/restaurants/:id' do
-  @restaurant = Restaurant.find(params[:id])
+  @restaurant = Restaurant.find_by(id: params[:id])
   erb :"restaurants/show"
 end
