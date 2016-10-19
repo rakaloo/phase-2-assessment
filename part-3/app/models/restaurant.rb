@@ -11,4 +11,8 @@ class Restaurant < ActiveRecord::Base
   def full_address
     "#{self.address}, #{self.city}, #{self.state}, #{zip}"
   end
+
+  def reviewed_by?(user)
+    self.reviews.where(author_id: user.id).any?
+  end
 end

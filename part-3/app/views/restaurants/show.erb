@@ -19,7 +19,7 @@
 <% if logged_in? %>
   <% if @new_review %>
     <p>Thank you for your review!</p>
-  <% elsif @restaurant.reviews.where(author_id: current_user.id).any? %>
+  <% elsif @restaurant.reviewed_by?(current_user) %>
     <p>You have already reviewed this restaurant.</p>
   <% else %>
     <%= erb :"reviews/_form", layout: false, locals: { restaurant: @restaurant, review: @review } %>
