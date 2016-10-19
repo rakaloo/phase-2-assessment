@@ -1,6 +1,6 @@
-var Employee = function(object) {
-  this.firstName = object.firstName;
-  this.sales = object.sales;
+var Employee = function(args) {
+  this.firstName = args.firstName;
+  this.sales = args.sales;
 
   this.totalSales = function() {
     var sum = 0;
