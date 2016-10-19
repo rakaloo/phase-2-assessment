@@ -52,6 +52,11 @@ end
 get '/restaurants/:id' do
   @restaurant = Restaurant.find_by(id: params[:id])
   @review = Review.new
+
+  if params[:new_review]
+    @new_review = true
+  end
+
   erb :"restaurants/show"
 end
 
@@ -65,11 +70,8 @@ post '/restaurants/:id/reviews' do
   @review.restaurant = @restaurant
 
   if @review.save
-    redirect "/restaurants/#{@restaurant.id}"
+    redirect "/restaurants/#{@restaurant.id}?new_review=true"
   else
     erb :"restaurants/show"
   end
-
-
-
 end

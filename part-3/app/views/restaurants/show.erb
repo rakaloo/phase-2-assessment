@@ -14,10 +14,16 @@
   <% end %>
 </ul>
 
-<h3>Leave a Review</h3>
+<h3>Leave a review</h3>
 
 <% if logged_in? %>
-  <%= erb :"reviews/_form", layout: false, locals: { restaurant: @restaurant, review: @review } %>
+  <% if @new_review %>
+    <p>Thank you for your review!</p>
+  <% elsif @restaurant.reviews.where(author_id: current_user.id).any? %>
+    <p>You have already reviewed this restaurant.</p>
+  <% else %>
+    <%= erb :"reviews/_form", layout: false, locals: { restaurant: @restaurant, review: @review } %>
+  <% end %>
 <% else %>
   <p>You must be logged in to leave a review.</p>
   <a href="/login">Login</a>
