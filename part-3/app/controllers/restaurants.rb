@@ -34,6 +34,13 @@ put '/restaurants/:id' do
   end
 end
 
+delete '/restaurants/:id' do
+  @restaurant = Restaurant.find(params[:id])
+
+  @restaurant.destroy
+  redirect "/restaurants"
+end
+
 get '/restaurants/:id' do
   @restaurant = Restaurant.find(params[:id])
   erb :"restaurants/show"
