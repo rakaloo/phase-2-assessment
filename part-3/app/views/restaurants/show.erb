@@ -1,0 +1,30 @@
+<h2><%= @restaurant.name %></h2>
+
+<p>Address: <%= @restaurant.full_address %></p>
+<p>Cuisine: <%= @restaurant.cuisine %></p>
+<p>Added by: <%= @restaurant.owner.username %></p>
+
+<h3>Reviews</h3>
+
+<ul>
+  <% if reviews = @restaurant.reviews %>
+    <% reviews.each do |review| %>
+      <%= erb :"reviews/_review", layout: false, locals: { review: review } %><br>
+    <% end %>
+  <% end %>
+</ul>
+
+<h3>Leave a review</h3>
+
+<% if logged_in? %>
+  <% if @new_review %>
+    <p>Thank you for your review!</p>
+  <% elsif @restaurant.reviewed_by?(current_user) %>
+    <p>You have already reviewed this restaurant.</p>
+  <% else %>
+    <%= erb :"reviews/_form", layout: false, locals: { restaurant: @restaurant, review: @review } %>
+  <% end %>
+<% else %>
+  <p>You must be logged in to leave a review.</p>
+  <a href="/login">Login</a>
+<% end %>

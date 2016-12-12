@@ -1,0 +1,10 @@
+<h2>Enter Restaurant Details</h2>
+
+<% if @restaurant.errors.any? %>
+<%= erb :"_errors", locals: {errors: @restaurant.errors} %>
+<% end %>
+
+<form method="POST" action="/restaurants">
+  <%= erb :"restaurants/_form", locals: {restaurant: @restaurant} %>
+  <input type="submit" class="btn btn-default" value="Add restaurant">
+</form>

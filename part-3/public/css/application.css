@@ -1,0 +1,30 @@
+.login {
+  text-align: center;
+}
+
+form {
+  margin: 10px;
+}
+
+input {
+  margin: 5px 0;
+}
+
+ul.restaurants {
+  list-style: none;
+}
+
+.restaurants li {
+  border: 2px solid black;
+  width: 200px;
+  height: 120px;
+  padding-top: 20px;
+  margin: 50px;
+  float: left;
+  display: inline;
+  text-align: center;
+}
+
+li .btn {
+  margin: 0;
+}

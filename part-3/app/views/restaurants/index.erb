@@ -1,0 +1,5 @@
+<ul class="restaurants">
+  <% @restaurants.each do |restaurant| %>
+    <%= erb :"restaurants/_restaurant", layout: false, locals: {restaurant: restaurant} %><br>
+  <% end %>
+</ul>

@@ -1,0 +1,12 @@
+<h2>Enter Restaurant Details</h2>
+
+<% if @restaurant.errors.any? %>
+<%= erb :"_errors", locals: {errors: @restaurant.errors} %>
+<% end %>
+
+<form method="POST" action="/restaurants/<%= @restaurant.id %>">
+  <input type="hidden" name="_method" value="PUT">
+  <%= erb :"restaurants/_form", locals: {restaurant: @restaurant} %>
+  <input type="submit" class="btn btn-info" value="Update restaurant">
+</form>
+
